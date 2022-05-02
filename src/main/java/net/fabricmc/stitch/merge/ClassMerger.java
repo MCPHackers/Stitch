@@ -74,17 +74,17 @@ public class ClassMerger {
     }
 
     private static void visitSideAnnotation(AnnotationVisitor av, String side) {
-        av.visitEnum("value", SIDE_DESCRIPTOR, side.toUpperCase(Locale.ROOT));
-        av.visitEnd();
+//        av.visitEnum("value", SIDE_DESCRIPTOR, side.toUpperCase(Locale.ROOT));
+//        av.visitEnd();
     }
 
     private static void visitItfAnnotation(AnnotationVisitor av, String side, List<String> itfDescriptors) {
-        for (String itf : itfDescriptors) {
-            AnnotationVisitor avItf = av.visitAnnotation(null, ITF_DESCRIPTOR);
-            avItf.visitEnum("value", SIDE_DESCRIPTOR, side.toUpperCase(Locale.ROOT));
-            avItf.visit("itf", Type.getType("L" + itf + ";"));
-            avItf.visitEnd();
-        }
+//        for (String itf : itfDescriptors) {
+//            AnnotationVisitor avItf = av.visitAnnotation(null, ITF_DESCRIPTOR);
+//            avItf.visitEnum("value", SIDE_DESCRIPTOR, side.toUpperCase(Locale.ROOT));
+//            avItf.visit("itf", Type.getType("L" + itf + ";"));
+//            avItf.visitEnd();
+//        }
     }
 
     public static class SidedClassVisitor extends ClassVisitor {
@@ -97,8 +97,8 @@ public class ClassMerger {
 
         @Override
         public void visitEnd() {
-            AnnotationVisitor av = cv.visitAnnotation(SIDED_DESCRIPTOR, true);
-            visitSideAnnotation(av, side);
+//            AnnotationVisitor av = cv.visitAnnotation(SIDED_DESCRIPTOR, true);
+//            visitSideAnnotation(av, side);
             super.visitEnd();
         }
     }
@@ -169,17 +169,17 @@ public class ClassMerger {
         }
 
         if (!clientItfs.isEmpty() || !serverItfs.isEmpty()) {
-            AnnotationVisitor envInterfaces = nodeOut.visitAnnotation(ITF_LIST_DESCRIPTOR, false);
-            AnnotationVisitor eiArray = envInterfaces.visitArray("value");
-
-            if (!clientItfs.isEmpty()) {
-                visitItfAnnotation(eiArray, "CLIENT", clientItfs);
-            }
-            if (!serverItfs.isEmpty()) {
-                visitItfAnnotation(eiArray, "SERVER", serverItfs);
-            }
-            eiArray.visitEnd();
-            envInterfaces.visitEnd();
+//            AnnotationVisitor envInterfaces = nodeOut.visitAnnotation(ITF_LIST_DESCRIPTOR, false);
+//            AnnotationVisitor eiArray = envInterfaces.visitArray("value");
+//
+//            if (!clientItfs.isEmpty()) {
+//                visitItfAnnotation(eiArray, "CLIENT", clientItfs);
+//            }
+//            if (!serverItfs.isEmpty()) {
+//                visitItfAnnotation(eiArray, "SERVER", serverItfs);
+//            }
+//            eiArray.visitEnd();
+//            envInterfaces.visitEnd();
         }
 
         new Merger<InnerClassNode>(nodeC.innerClasses, nodeS.innerClasses) {
@@ -201,8 +201,8 @@ public class ClassMerger {
 
             @Override
             public void applySide(FieldNode entry, String side) {
-                AnnotationVisitor av = entry.visitAnnotation(SIDED_DESCRIPTOR, false);
-                visitSideAnnotation(av, side);
+//                AnnotationVisitor av = entry.visitAnnotation(SIDED_DESCRIPTOR, false);
+//                visitSideAnnotation(av, side);
             }
         }.merge(nodeOut.fields);
 
@@ -214,8 +214,8 @@ public class ClassMerger {
 
             @Override
             public void applySide(MethodNode entry, String side) {
-                AnnotationVisitor av = entry.visitAnnotation(SIDED_DESCRIPTOR, false);
-                visitSideAnnotation(av, side);
+//                AnnotationVisitor av = entry.visitAnnotation(SIDED_DESCRIPTOR, false);
+//                visitSideAnnotation(av, side);
             }
         }.merge(nodeOut.methods);
 
