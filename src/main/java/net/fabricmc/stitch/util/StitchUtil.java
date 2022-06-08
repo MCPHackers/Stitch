@@ -96,6 +96,13 @@ public final class StitchUtil {
         return Collections.newSetFromMap(new IdentityHashMap<>());
     }
 
+    public static List<String> mergeWithoutOrder(List<String> first, List<String> second) {
+        Set<String> out = new LinkedHashSet<>(first);
+        out.addAll(new LinkedHashSet<>(second));
+
+        return new ArrayList<>(new LinkedHashSet<>(out));
+    }
+
     public static List<String> mergePreserveOrder(List<String> first, List<String> second) {
         List<String> out = new ArrayList<>();
         int i = 0;

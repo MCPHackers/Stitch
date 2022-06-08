@@ -39,7 +39,7 @@ public class ClassMerger {
             List<String> listClient = toMap(entriesClient, this.entriesClient);
             List<String> listServer = toMap(entriesServer, this.entriesServer);
 
-            this.entryNames = StitchUtil.mergePreserveOrder(listClient, listServer);
+            this.entryNames = StitchUtil.mergeWithoutOrder(listClient, listServer);
         }
 
         public abstract String getName(T entry);
